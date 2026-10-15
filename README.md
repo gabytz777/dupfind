@@ -11,15 +11,18 @@ Find duplicate files by content. Pure V, zero dependencies.
 
 ## Install
 
-One command (Linux x64, needs `curl` or `wget`):
+Download `dupfind-linux-x64` from the
+[releases page](https://github.com/gabytz777/dupfind/releases) and run it
+with no arguments — double-clicking works. A bare run installs itself to
+`~/.local/bin/dupfind` (creating it if needed) and tells you the exact
+`export PATH=...` line if that directory is not on your `PATH` yet:
 
 ```sh
-curl -sL https://raw.githubusercontent.com/gabytz777/dupfind/master/install.sh | sh
+chmod +x dupfind-linux-x64
+./dupfind-linux-x64
 ```
 
-This downloads the latest release binary to `~/.local/bin/dupfind`. If that
-directory is not on your `PATH`, the installer tells you the line to add
-to `~/.bashrc`.
+After that: `dupfind --preview ~/Pictures`.
 
 ## Build
 

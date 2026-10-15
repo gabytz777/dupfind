@@ -90,3 +90,16 @@ fn test_truncate_runes_keeps_utf8_intact() {
 	assert truncate_runes('abcdef', 3) == 'abc…'
 	assert truncate_runes('héllo wörld', 5) == 'héllo…'
 }
+
+fn test_install_self_copies_and_runs() {
+	tmp := os.join_path(os.temp_dir(), 'dupfind_install_test')
+	os.rmdir_all(tmp) or {}
+	os.mkdir_all(tmp)!
+	bin := os.join_path(tmp, 'bin')
+	dest := install_self(bin)!
+	assert dest == os.join_path(bin, 'dupfind')
+	assert os.is_file(dest)
+	assert os.is_executable(dest)
+	// byte-identical copy of the running binary
+	assert os.read_bytes(dest)! == os.read_bytes(os.executable())!
+}
