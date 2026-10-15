@@ -20,8 +20,11 @@ Needs a [V](https://vlang.io) toolchain, nothing else.
 ## Usage
 
 ```sh
-dupfind <dir> [dir...]   # human-readable report
-dupfind --json <dir>...  # JSON array of {size, hash, files}
+dupfind <dir> [dir...]          # human-readable report
+dupfind --preview [dir...]      # also show first 5 lines of each group
+dupfind --preview=2 [dir...]   # also show first 2 lines of each group
+dupfind --json <dir>...         # JSON array of {size, hash, files}
+dupfind --version
 ```
 
 Example:

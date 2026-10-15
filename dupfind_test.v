@@ -64,3 +64,29 @@ fn test_find_dupes_missing_dir_is_an_error() {
 		assert false, 'missing dir must error'
 	}
 }
+
+fn test_preview_lines_shows_head() {
+	dir := make_tree({
+		'a.txt': 'l1\nl2\nl3\nl4'
+	})!
+	full := '${dir}/a.txt'
+	assert preview_lines(full, 2) == ['l1', 'l2']
+	assert preview_lines(full, 10) == ['l1', 'l2', 'l3', 'l4']
+}
+
+fn test_preview_lines_handles_empty_and_binary() {
+	dir := make_tree({
+		'e.txt': ''
+	})!
+	assert preview_lines('${dir}/e.txt', 5) == ['<empty file>']
+	bin := os.join_path(dir, 'b.bin')
+	os.write_file(bin, 'ab\x00cd\nef\n')!
+	assert preview_lines(bin, 5) == ['<binary file, preview skipped>']
+	assert preview_lines('${dir}/missing.txt', 5) == ['<unreadable>']
+}
+
+fn test_truncate_runes_keeps_utf8_intact() {
+	assert truncate_runes('héllo', 10) == 'héllo'
+	assert truncate_runes('abcdef', 3) == 'abc…'
+	assert truncate_runes('héllo wörld', 5) == 'héllo…'
+}
