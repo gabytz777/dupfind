@@ -9,6 +9,18 @@ Find duplicate files by content. Pure V, zero dependencies.
 2. Stream-hash same-size candidates with FNV-1a in constant memory.
 3. Report groups of byte-identical files, sorted by size.
 
+## Install
+
+One command (Linux x64, needs `curl` or `wget`):
+
+```sh
+curl -sL https://raw.githubusercontent.com/gabytz777/dupfind/master/install.sh | sh
+```
+
+This downloads the latest release binary to `~/.local/bin/dupfind`. If that
+directory is not on your `PATH`, the installer tells you the line to add
+to `~/.bashrc`.
+
 ## Build
 
 ```sh
