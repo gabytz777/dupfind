@@ -20,12 +20,20 @@ Needs a [V](https://vlang.io) toolchain, nothing else.
 ## Usage
 
 ```sh
-dupfind <dir> [dir...]          # human-readable report
-dupfind --preview [dir...]      # also show first 5 lines of each group
-dupfind --preview=2 [dir...]   # also show first 2 lines of each group
-dupfind --json <dir>...         # JSON array of {size, hash, files}
+dupfind <dir> [dir...]               # human-readable report
+dupfind --preview [dir...]           # also show first 5 lines of each group
+dupfind --preview=2 [dir...]         # also show first 2 lines of each group
+dupfind --json <dir>...              # JSON array of {size, hash, files}
+dupfind --similar-images [dir...]    # group visually similar images (<=5 bits)
+dupfind --similar-images=10 [dir...] # ...with a looser bit threshold
 dupfind --version
 ```
+
+`--similar-images` decodes PNG/JPEG with the pure-V stdlib decoders,
+hashes each image to 64 bits (difference hash over a 9x8 luma grid),
+and groups images within the threshold Hamming distance — so a
+re-encoded or slightly edited copy still matches, where byte hashing
+would miss it. Undecodable files are reported and skipped.
 
 Example:
 
